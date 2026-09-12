@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
 
@@ -15,26 +15,77 @@ function isLinkActive(pathname: string, to: string) {
 
 const pillTransition = { type: 'spring' as const, stiffness: 380, damping: 32, mass: 0.9 }
 
+type PillRect = { offset: number; size: number }
+
+// A manually-measured sliding pill instead of framer-motion's `layoutId` projection.
+// `layoutId` measures position via getBoundingClientRect and — since this nav is
+// `position: fixed` — framer incorrectly compensates for the page's scroll offset,
+// making the pill appear to fly in from wherever the page happened to be scrolled to.
+// Measuring offsets ourselves relative to the pill's own (non-scrolling) container
+// sidesteps that entirely.
+function useActivePillRect(
+  itemRefs: React.RefObject<Record<string, HTMLElement | null>>,
+  activeTo: string | undefined,
+  axis: 'x' | 'y',
+) {
+  const [rect, setRect] = useState<PillRect | null>(null)
+
+  useEffect(() => {
+    function measure() {
+      const el = activeTo ? itemRefs.current[activeTo] : null
+      if (!el) {
+        setRect(null)
+        return
+      }
+      setRect(
+        axis === 'x'
+          ? { offset: el.offsetLeft, size: el.offsetWidth }
+          : { offset: el.offsetTop, size: el.offsetHeight },
+      )
+    }
+
+    measure()
+    window.addEventListener('resize', measure)
+    return () => window.removeEventListener('resize', measure)
+  }, [activeTo, axis, itemRefs])
+
+  return rect
+}
+
 export function Nav() {
   const [open, setOpen] = useState(false)
   const { pathname } = useLocation()
+
+  const desktopItemRefs = useRef<Record<string, HTMLLIElement | null>>({})
+  const activeDesktop = links.find((l) => isLinkActive(pathname, l.to))?.to
+  const desktopPill = useActivePillRect(desktopItemRefs, activeDesktop, 'x')
+
+  const mobileItemRefs = useRef<Record<string, HTMLLIElement | null>>({})
+  const activeMobile = open ? links.find((l) => isLinkActive(pathname, l.to))?.to : undefined
+  const mobilePill = useActivePillRect(mobileItemRefs, activeMobile, 'y')
 
   return (
     <header className="fixed inset-x-0 top-6 z-50 flex justify-center px-4">
       <div className="flex w-full max-w-3xl flex-col items-center">
         <nav className="nav-glass flex items-center justify-center rounded-full p-2">
-          <ul className="hidden gap-1.5 md:flex">
+          <ul className="relative hidden gap-1.5 md:flex">
+            {desktopPill && (
+              <motion.div
+                animate={{ left: desktopPill.offset, width: desktopPill.size }}
+                transition={pillTransition}
+                className="absolute inset-y-0 top-0 rounded-full bg-black"
+              />
+            )}
             {links.map((l) => {
               const active = isLinkActive(pathname, l.to)
               return (
-                <li key={l.to} className="relative">
-                  {active && (
-                    <motion.div
-                      layoutId="nav-active-pill"
-                      transition={pillTransition}
-                      className="absolute inset-0 rounded-full bg-black"
-                    />
-                  )}
+                <li
+                  key={l.to}
+                  ref={(el) => {
+                    desktopItemRefs.current[l.to] = el
+                  }}
+                  className="relative"
+                >
                   <NavLink
                     to={l.to}
                     end={l.to === '/'}
@@ -65,18 +116,24 @@ export function Nav() {
         </nav>
 
         {open && (
-          <ul className="nav-glass mt-2 flex min-w-[180px] flex-col gap-1 rounded-3xl p-2 md:hidden">
+          <ul className="nav-glass relative mt-2 flex min-w-[180px] flex-col gap-1 rounded-3xl p-2 md:hidden">
+            {mobilePill && (
+              <motion.div
+                animate={{ top: mobilePill.offset, height: mobilePill.size }}
+                transition={pillTransition}
+                className="absolute inset-x-0 left-0 rounded-2xl bg-black"
+              />
+            )}
             {links.map((l) => {
               const active = isLinkActive(pathname, l.to)
               return (
-                <li key={l.to} className="relative">
-                  {active && (
-                    <motion.div
-                      layoutId="nav-active-pill-mobile"
-                      transition={pillTransition}
-                      className="absolute inset-0 rounded-2xl bg-black"
-                    />
-                  )}
+                <li
+                  key={l.to}
+                  ref={(el) => {
+                    mobileItemRefs.current[l.to] = el
+                  }}
+                  className="relative"
+                >
                   <NavLink
                     to={l.to}
                     end={l.to === '/'}

@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { Section } from './Section'
+import { ChemistryParticles } from './ChemistryParticles'
 import { experience } from '../data/experience'
 
 // Distance from the bottom of the viewport used as the scroll "reveal" line —
@@ -111,7 +112,14 @@ export function Experience() {
   }, [])
 
   return (
-    <Section id="experience" eyebrow="Career" title="Professional Experience" largeTitle centerHeader>
+    <Section
+      id="experience"
+      eyebrow="Career"
+      title="Professional Experience"
+      largeTitle
+      centerHeader
+      decorate={<ChemistryParticles color="10,10,10" dotOpacity={0.16} lineOpacity={0.07} />}
+    >
       <ol ref={containerRef} className="relative">
         <span className="absolute left-[4px] top-0 h-full w-px bg-line md:left-1/2 md:-translate-x-1/2" />
         <span

@@ -9,6 +9,7 @@ export function Section({
   alt,
   centerHeader,
   largeTitle,
+  decorate,
 }: {
   id: string
   title: string
@@ -17,10 +18,15 @@ export function Section({
   alt?: boolean
   centerHeader?: boolean
   largeTitle?: boolean
+  decorate?: ReactNode
 }) {
   return (
-    <section id={id} className={`scroll-mt-20 ${alt ? 'bg-paper-alt' : ''}`}>
-      <div className="mx-auto max-w-5xl px-6 py-20 md:py-24">
+    <section
+      id={id}
+      className={`relative scroll-mt-20 ${alt ? 'bg-paper-alt' : ''} ${decorate ? 'overflow-hidden' : ''}`}
+    >
+      {decorate}
+      <div className="relative z-10 mx-auto max-w-5xl px-6 py-20 md:py-24">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
