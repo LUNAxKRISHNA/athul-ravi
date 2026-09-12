@@ -12,7 +12,17 @@ const LINK_DISTANCE = 130
 const PARTICLE_COUNT_DESKTOP = 46
 const PARTICLE_COUNT_MOBILE = 22
 
-export function ChemistryParticles({ className = '' }: { className?: string }) {
+export function ChemistryParticles({
+  className = '',
+  color = '255,255,255',
+  dotOpacity = 0.35,
+  lineOpacity = 0.16,
+}: {
+  className?: string
+  color?: string
+  dotOpacity?: number
+  lineOpacity?: number
+}) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
@@ -74,8 +84,8 @@ export function ChemistryParticles({ className = '' }: { className?: string }) {
           const dy = a.y - b.y
           const dist = Math.sqrt(dx * dx + dy * dy)
           if (dist < LINK_DISTANCE) {
-            const alpha = (1 - dist / LINK_DISTANCE) * 0.16
-            ctx!.strokeStyle = `rgba(255,255,255,${alpha})`
+            const alpha = (1 - dist / LINK_DISTANCE) * lineOpacity
+            ctx!.strokeStyle = `rgba(${color},${alpha})`
             ctx!.lineWidth = 0.6
             ctx!.beginPath()
             ctx!.moveTo(a.x, a.y)
@@ -88,7 +98,7 @@ export function ChemistryParticles({ className = '' }: { className?: string }) {
       for (const p of particles) {
         ctx!.beginPath()
         ctx!.arc(p.x, p.y, p.r, 0, Math.PI * 2)
-        ctx!.fillStyle = 'rgba(255,255,255,0.35)'
+        ctx!.fillStyle = `rgba(${color},${dotOpacity})`
         ctx!.fill()
       }
 

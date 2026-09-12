@@ -15,6 +15,7 @@ export const profile = {
     { label: 'IRINS / Vidwan', url: 'https://vidwan.inflibnet.ac.in/profile/552411' },
     { label: 'CVV Faculty Profile', url: 'https://cvv.ac.in/faculty/mr-athul-ravi' },
   ],
+  linkedin: 'https://www.linkedin.com/in/athul-ravi-chem/',
   cvFile: '/cv/athul-ravi-cv.pdf',
   photo: '/images/athul-ravi.jpg',
   photoCutout: '/images/athul-ravi-cutout.png',
