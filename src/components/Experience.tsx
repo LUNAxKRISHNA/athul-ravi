@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { Section } from './Section'
 import { experience } from '../data/experience'
@@ -10,12 +10,10 @@ const REVEAL_MARGIN = 140
 function TimelineItem({
   item,
   index,
-  active,
   dotRef,
 }: {
   item: (typeof experience)[number]
   index: number
-  active: boolean
   dotRef: (el: HTMLSpanElement | null) => void
 }) {
   const dateOnRight = index % 2 === 0
@@ -56,12 +54,8 @@ function TimelineItem({
     <li className="relative pb-10 pl-10 last:pb-0 md:grid md:grid-cols-[1fr_40px_1fr] md:items-start md:gap-x-8 md:pb-16 md:pl-0">
       {dateOnRight ? content : date}
 
-      <span ref={dotRef} className="absolute left-0 top-1.5 md:static md:mt-1.5 md:justify-self-center">
-        <span
-          className={`block h-2.5 w-2.5 rounded-full transition-colors duration-500 ${
-            active ? 'bg-ink' : 'bg-line'
-          }`}
-        />
+      <span className="absolute left-0 top-1.5 md:static md:mt-1.5 md:justify-self-center">
+        <span ref={dotRef} className="block h-2.5 w-2.5 rounded-full bg-line transition-colors duration-500" />
       </span>
 
       {dateOnRight ? date : content}
@@ -71,27 +65,31 @@ function TimelineItem({
 
 export function Experience() {
   const containerRef = useRef<HTMLOListElement>(null)
+  const lineRef = useRef<HTMLSpanElement>(null)
   const dotRefs = useRef<(HTMLSpanElement | null)[]>([])
-  const [lineHeight, setLineHeight] = useState(0)
-  const [activeSet, setActiveSet] = useState<boolean[]>(() => experience.map(() => false))
 
   useEffect(() => {
     let raf = 0
 
     function measure() {
       const ol = containerRef.current
-      if (!ol) return
+      const line = lineRef.current
+      if (!ol || !line) return
+
       const olRect = ol.getBoundingClientRect()
       const revealLine = window.innerHeight - REVEAL_MARGIN
       const filled = Math.min(olRect.height, Math.max(0, revealLine - olRect.top))
-      setLineHeight(filled)
-      setActiveSet(
-        dotRefs.current.map((dot) => {
-          if (!dot) return false
-          const dotRect = dot.getBoundingClientRect()
-          return dotRect.top - olRect.top <= filled
-        }),
-      )
+      const fraction = olRect.height > 0 ? filled / olRect.height : 0
+
+      line.style.transform = `scaleY(${fraction})`
+
+      for (const dot of dotRefs.current) {
+        if (!dot) continue
+        const dotRect = dot.getBoundingClientRect()
+        const isActive = dotRect.top - olRect.top <= filled
+        dot.classList.toggle('bg-ink', isActive)
+        dot.classList.toggle('bg-line', !isActive)
+      }
     }
 
     function onScroll() {
@@ -117,15 +115,15 @@ export function Experience() {
       <ol ref={containerRef} className="relative">
         <span className="absolute left-[4px] top-0 h-full w-px bg-line md:left-1/2 md:-translate-x-1/2" />
         <span
-          className="absolute left-[4px] top-0 w-px origin-top bg-ink transition-[height] duration-150 ease-out md:left-1/2 md:-translate-x-1/2"
-          style={{ height: lineHeight }}
+          ref={lineRef}
+          className="absolute left-[4px] top-0 h-full w-px origin-top bg-ink will-change-transform md:left-1/2 md:-translate-x-1/2"
+          style={{ transform: 'scaleY(0)' }}
         />
         {experience.map((e, i) => (
           <TimelineItem
             key={`${e.role}-${e.period}`}
             item={e}
             index={i}
-            active={activeSet[i]}
             dotRef={(el) => {
               dotRefs.current[i] = el
             }}
