@@ -10,6 +10,7 @@ export function Section({
   centerHeader,
   largeTitle,
   decorate,
+  wide,
 }: {
   id: string
   title: string
@@ -19,6 +20,7 @@ export function Section({
   centerHeader?: boolean
   largeTitle?: boolean
   decorate?: ReactNode
+  wide?: boolean
 }) {
   return (
     <section
@@ -26,7 +28,7 @@ export function Section({
       className={`relative scroll-mt-20 ${alt ? 'bg-paper-alt' : ''} ${decorate ? 'overflow-hidden' : ''}`}
     >
       {decorate}
-      <div className="relative z-10 mx-auto max-w-5xl px-6 py-20 md:py-24">
+      <div className={`relative z-10 mx-auto px-6 py-20 md:py-24 ${wide ? 'max-w-[100rem]' : 'max-w-5xl'}`}>
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
