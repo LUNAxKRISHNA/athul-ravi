@@ -8,7 +8,7 @@ export function Contact() {
         <div className="space-y-3 text-sm text-body">
           <p>
             <span className="font-medium text-ink">Email:</span>{' '}
-            <a href={`mailto:${profile.email}`} className="text-accent hover:underline">
+            <a href={`mailto:${profile.email}`} className="text-ink underline underline-offset-2">
               {profile.email}
             </a>
           </p>
@@ -22,7 +22,7 @@ export function Contact() {
           <a
             href={profile.cvFile}
             download
-            className="inline-flex items-center justify-center rounded-full bg-accent px-6 py-3 text-sm font-medium text-paper transition-opacity hover:opacity-90"
+            className="inline-flex items-center justify-center rounded-full bg-black px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-80"
           >
             Download Full CV (PDF)
           </a>
@@ -33,7 +33,7 @@ export function Contact() {
                 href={p.url}
                 target="_blank"
                 rel="noreferrer"
-                className="rounded-full border border-line px-4 py-2 text-xs text-body transition-colors hover:border-accent hover:text-accent"
+                className="rounded-full border border-line px-4 py-2 text-xs text-body transition-colors hover:border-black hover:text-ink"
               >
                 {p.label}
               </a>

@@ -16,4 +16,8 @@ export const profile = {
     { label: 'CVV Faculty Profile', url: 'https://cvv.ac.in/faculty/mr-athul-ravi' },
   ],
   cvFile: '/cv/athul-ravi-cv.pdf',
+  photo: '/images/athul-ravi.jpg',
+  photoCutout: '/images/athul-ravi-cutout.png',
+  researchEyebrow: 'Biomaterials & Sustainable Chemistry',
+  statement: 'Materials for healing. Chemistry for a sustainable future.',
 }

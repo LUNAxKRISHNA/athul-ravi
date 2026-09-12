@@ -1,40 +1,67 @@
 export const skillGroups = [
   {
+    number: '01',
     heading: 'Materials & Synthesis',
     items: [
-      'Hydrogel and 3D printed scaffold fabrication',
-      'Silica-based molecular-sieve materials and functionalisation',
+      'Hydrogel & 3D-printed scaffold fabrication',
+      'Silica-based molecular-sieve materials & functionalisation',
       'Nanocomposites',
-      'Batch, autoclave and supercritical-fluid natural-product extraction',
+      'Batch, autoclave & supercritical-fluid extraction',
     ],
   },
   {
+    number: '02',
     heading: 'Characterisation & Analytical Instrumentation',
     items: [
-      'UV-visible and IR spectrophotometry',
+      'UV-visible & IR spectrophotometry',
       'Raman spectroscopy',
       'XPS',
       'HR-TEM',
       'SEM-EDX',
-      'Elemental analysis (Computrace, ion-selective electrode)',
+      'Elemental analysis',
       'XRF',
-      'Column, thin-layer and flash chromatography',
-      'In-vitro and antibacterial assays',
+      'Column, TLC & flash chromatography',
+      'In-vitro & antibacterial assays',
     ],
   },
   {
+    number: '03',
     heading: 'Computational & Software',
     items: [
-      'Molecular docking and 3D-QSAR (Schrödinger, AutoDock Vina)',
-      'Gaussian, GaussSum, PyMOL, ChemDraw',
-      'Machine-learning and graph-neural-network approaches for materials design and biological network analysis',
+      'Molecular docking & 3D-QSAR (Schrödinger, AutoDock Vina)',
+      'Gaussian',
+      'GaussSum',
+      'PyMOL',
+      'ChemDraw',
+      'ML & graph-neural-network approaches for materials design',
     ],
   },
 ]
 
 export const training = [
-  'Six-month internship in Computer-Aided Drug Design (CADD) and 3D-QSAR — Drug Discovery Centre in collaboration with IIT Madras, Annamalai University (2015–16).',
-  'Schrödinger software training (one month), IIT Madras.',
-  'NPTEL certification — Analytical Chemistry (IIT Kharagpur, 8 weeks) and Composite Materials (IIT Kanpur, 12 weeks).',
-  'Ten-day hands-on training in in-vitro biological analysis, VJ Biotech, Coimbatore.',
+  {
+    duration: '2015–16 · 6 months',
+    title: 'Computer-Aided Drug Design (CADD) & 3D-QSAR',
+    institution: 'Drug Discovery Centre, IIT Madras & Annamalai University',
+  },
+  {
+    duration: '1 month',
+    title: 'Schrödinger Software Training',
+    institution: 'IIT Madras',
+  },
+  {
+    duration: '8 weeks · NPTEL',
+    title: 'Analytical Chemistry',
+    institution: 'IIT Kharagpur',
+  },
+  {
+    duration: '12 weeks · NPTEL',
+    title: 'Composite Materials',
+    institution: 'IIT Kanpur',
+  },
+  {
+    duration: '10 days',
+    title: 'In-vitro Biological Analysis (Hands-on)',
+    institution: 'VJ Biotech, Coimbatore',
+  },
 ]

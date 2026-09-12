@@ -8,9 +8,9 @@ export function Research() {
         {researchInterests.map((r) => (
           <div
             key={r.title}
-            className="rounded-2xl border border-line bg-paper p-6 transition-shadow hover:shadow-sm"
+            className="glass rounded-2xl p-6 shadow-sm transition-shadow hover:shadow-md"
           >
-            <h3 className="font-heading text-lg font-medium text-ink">{r.title}</h3>
+            <h3 className="font-heading text-lg font-semibold text-ink">{r.title}</h3>
             <p className="mt-2 text-sm leading-relaxed text-body">{r.description}</p>
           </div>
         ))}

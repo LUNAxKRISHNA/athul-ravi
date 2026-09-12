@@ -1,91 +1,98 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+import { NavLink, useLocation } from 'react-router-dom'
+import { motion } from 'framer-motion'
 
 const links = [
-  { id: 'about', label: 'About' },
-  { id: 'research', label: 'Research' },
-  { id: 'experience', label: 'Experience' },
-  { id: 'publications', label: 'Publications' },
-  { id: 'grants', label: 'Grants' },
-  { id: 'skills', label: 'Skills' },
-  { id: 'contact', label: 'Contact' },
+  { to: '/', label: 'Home' },
+  { to: '/research', label: 'Research' },
+  { to: '/experience', label: 'Experience' },
+  { to: '/contact', label: 'Contact' },
 ]
 
+function isLinkActive(pathname: string, to: string) {
+  return to === '/' ? pathname === '/' : pathname.startsWith(to)
+}
+
+const pillTransition = { type: 'spring' as const, stiffness: 380, damping: 32, mass: 0.9 }
+
 export function Nav() {
-  const [active, setActive] = useState('about')
   const [open, setOpen] = useState(false)
-
-  useEffect(() => {
-    const sections = links
-      .map((l) => document.getElementById(l.id))
-      .filter((el): el is HTMLElement => el !== null)
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) setActive(entry.target.id)
-        })
-      },
-      { rootMargin: '-40% 0px -50% 0px', threshold: 0 },
-    )
-
-    sections.forEach((el) => observer.observe(el))
-    return () => observer.disconnect()
-  }, [])
+  const { pathname } = useLocation()
 
   return (
-    <header className="sticky top-0 z-50 border-b border-line/70 bg-paper/90 backdrop-blur">
-      <nav className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-        <a href="#top" className="font-heading text-lg font-medium text-ink">
-          Athul Ravi
-        </a>
+    <header className="fixed inset-x-0 top-6 z-50 flex justify-center px-4">
+      <div className="flex w-full max-w-3xl flex-col items-center">
+        <nav className="nav-glass flex items-center justify-center rounded-full p-2">
+          <ul className="hidden gap-1.5 md:flex">
+            {links.map((l) => {
+              const active = isLinkActive(pathname, l.to)
+              return (
+                <li key={l.to} className="relative">
+                  {active && (
+                    <motion.div
+                      layoutId="nav-active-pill"
+                      transition={pillTransition}
+                      className="absolute inset-0 rounded-full bg-black"
+                    />
+                  )}
+                  <NavLink
+                    to={l.to}
+                    end={l.to === '/'}
+                    className={`relative z-10 block rounded-full px-4 py-2 text-sm transition-colors ${
+                      active ? 'font-medium text-white' : 'text-black hover:bg-black/5'
+                    }`}
+                  >
+                    {l.label}
+                  </NavLink>
+                </li>
+              )
+            })}
+          </ul>
 
-        <ul className="hidden gap-7 md:flex">
-          {links.map((l) => (
-            <li key={l.id}>
-              <a
-                href={`#${l.id}`}
-                className={`text-sm transition-colors ${
-                  active === l.id ? 'text-accent font-medium' : 'text-body hover:text-ink'
-                }`}
-              >
-                {l.label}
-              </a>
-            </li>
-          ))}
-        </ul>
+          <button
+            aria-label="Toggle menu"
+            className="rounded-full p-2 text-black md:hidden"
+            onClick={() => setOpen((o) => !o)}
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              {open ? (
+                <path d="M6 6l12 12M18 6l-12 12" strokeLinecap="round" />
+              ) : (
+                <path d="M3 6h18M3 12h18M3 18h18" strokeLinecap="round" />
+              )}
+            </svg>
+          </button>
+        </nav>
 
-        <button
-          aria-label="Toggle menu"
-          className="text-ink md:hidden"
-          onClick={() => setOpen((o) => !o)}
-        >
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            {open ? (
-              <path d="M6 6l12 12M18 6l-12 12" strokeLinecap="round" />
-            ) : (
-              <path d="M3 6h18M3 12h18M3 18h18" strokeLinecap="round" />
-            )}
-          </svg>
-        </button>
-      </nav>
-
-      {open && (
-        <ul className="flex flex-col gap-1 border-t border-line/70 px-6 py-4 md:hidden">
-          {links.map((l) => (
-            <li key={l.id}>
-              <a
-                href={`#${l.id}`}
-                onClick={() => setOpen(false)}
-                className={`block py-2 text-sm ${
-                  active === l.id ? 'text-accent font-medium' : 'text-body'
-                }`}
-              >
-                {l.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      )}
+        {open && (
+          <ul className="nav-glass mt-2 flex min-w-[180px] flex-col gap-1 rounded-3xl p-2 md:hidden">
+            {links.map((l) => {
+              const active = isLinkActive(pathname, l.to)
+              return (
+                <li key={l.to} className="relative">
+                  {active && (
+                    <motion.div
+                      layoutId="nav-active-pill-mobile"
+                      transition={pillTransition}
+                      className="absolute inset-0 rounded-2xl bg-black"
+                    />
+                  )}
+                  <NavLink
+                    to={l.to}
+                    end={l.to === '/'}
+                    onClick={() => setOpen(false)}
+                    className={`relative z-10 block rounded-2xl px-4 py-2.5 text-sm transition-colors ${
+                      active ? 'font-medium text-white' : 'text-black'
+                    }`}
+                  >
+                    {l.label}
+                  </NavLink>
+                </li>
+              )
+            })}
+          </ul>
+        )}
+      </div>
     </header>
   )
 }

@@ -7,12 +7,16 @@ export function Section({
   eyebrow,
   children,
   alt,
+  centerHeader,
+  largeTitle,
 }: {
   id: string
   title: string
   eyebrow?: string
   children: ReactNode
   alt?: boolean
+  centerHeader?: boolean
+  largeTitle?: boolean
 }) {
   return (
     <section id={id} className={`scroll-mt-20 ${alt ? 'bg-paper-alt' : ''}`}>
@@ -23,12 +27,21 @@ export function Section({
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.5, ease: 'easeOut' }}
         >
-          {eyebrow && (
-            <p className="mb-2 text-sm font-medium uppercase tracking-widest text-accent">
-              {eyebrow}
-            </p>
-          )}
-          <h2 className="font-heading text-3xl font-medium text-ink md:text-4xl">{title}</h2>
+          <div className={centerHeader ? 'text-center' : ''}>
+            {eyebrow && (
+              <p className="font-mono mb-2 text-sm font-semibold uppercase tracking-widest text-body">
+                {eyebrow}
+              </p>
+            )}
+            <h2
+              className={`font-heading font-bold tracking-tight text-ink ${
+                largeTitle ? 'text-4xl md:text-5xl' : 'text-3xl md:text-4xl'
+              }`}
+            >
+              {title}
+            </h2>
+          </div>
+          <div className="mt-6 border-t border-black/10" />
           <div className="mt-10">{children}</div>
         </motion.div>
       </div>
