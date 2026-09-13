@@ -7,12 +7,12 @@ export function Projects() {
       {projects.map((p, i) => (
         <div key={p.title} className="border-t border-black/10 py-12 first:border-t-0 first:pt-0">
           <div className="flex flex-row items-start gap-6 md:gap-10">
-            <span className="shrink-0 font-heading text-6xl font-bold leading-none text-black/10 md:text-7xl">
+            <span className="shrink-0 font-heading text-4xl font-bold leading-none text-black/10 md:text-5xl">
               {String(i + 1).padStart(2, '0')}
             </span>
 
             <div className="flex flex-1 flex-col gap-3">
-              <h3 className="font-heading text-2xl font-bold leading-snug text-ink md:text-3xl">{p.title}</h3>
+              <h3 className="font-heading text-lg font-bold leading-snug text-ink md:text-xl">{p.title}</h3>
 
               <ul className="max-w-xl space-y-1.5 text-sm leading-relaxed text-body">
                 {p.points.map((pt, j) => (
