@@ -4,6 +4,7 @@ import { Home } from './pages/Home'
 import { ResearchPage } from './pages/ResearchPage'
 import { ExperiencePage } from './pages/ExperiencePage'
 import { ContactPage } from './pages/ContactPage'
+import { NotFoundPage } from './pages/NotFoundPage'
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="research" element={<ResearchPage />} />
         <Route path="experience" element={<ExperiencePage />} />
         <Route path="contact" element={<ContactPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
   )

@@ -11,7 +11,7 @@ function ResearchCard({
   const direction: 'down' | 'up' = index % 2 === 0 ? 'down' : 'up'
 
   return (
-    <div className="group relative isolate min-h-[320px] overflow-hidden bg-paper sm:min-h-[380px] lg:min-h-[460px]">
+    <div className="group relative isolate min-h-80 overflow-hidden bg-paper sm:min-h-95 lg:min-h-115">
       <span
         className={`absolute inset-x-0 h-full scale-y-0 bg-black transition-transform duration-500 ease-out group-hover:scale-y-100 ${direction === 'down' ? 'top-0 origin-top' : 'bottom-0 origin-bottom'
           }`}
