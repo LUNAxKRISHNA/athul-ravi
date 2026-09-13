@@ -4,7 +4,7 @@ import { skillGroups, training } from '../data/skills'
 
 export function Skills() {
   return (
-    <Section id="skills" eyebrow="Capabilities" title="Skills & Training" alt centerHeader largeTitle>
+    <Section id="skills" eyebrow="Capabilities" title="Skills & Training" centerHeader largeTitle>
       <div>
         <p className="text-center font-mono text-xs font-medium uppercase tracking-[0.2em] text-body">
           Research Capabilities
