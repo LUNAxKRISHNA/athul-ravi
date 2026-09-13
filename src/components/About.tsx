@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { Section } from './Section'
 import { profile } from '../data/profile'
 
@@ -8,18 +9,16 @@ export function About() {
         <div className="md:flex-1">
           <p className="text-base leading-relaxed text-body md:text-lg">{profile.summary}</p>
 
-          <div className="mt-8 flex flex-wrap gap-4">
-            {profile.profiles.map((p) => (
-              <a
-                key={p.label}
-                href={p.url}
-                target="_blank"
-                rel="noreferrer"
-                className="rounded-full border border-line px-4 py-2 text-sm text-body transition-colors hover:border-black hover:text-ink"
-              >
-                {p.label} ↗
-              </a>
-            ))}
+          <div className="mt-8">
+            <Link
+              to="/contact"
+              className="group inline-flex items-center gap-2 rounded-full bg-black px-6 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-85"
+            >
+              Contact
+              <span aria-hidden="true" className="inline-block transition-transform duration-300 ease-out group-hover:translate-x-1">
+                →
+              </span>
+            </Link>
           </div>
         </div>
 
