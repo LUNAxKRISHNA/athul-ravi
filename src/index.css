@@ -108,12 +108,19 @@ body {
 
 .nav-glass {
   position: relative;
-  background: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(24px) saturate(200%);
-  -webkit-backdrop-filter: blur(24px) saturate(200%);
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
   border: 1px solid rgba(255, 255, 255, 0.65);
   box-shadow:
     0 10px 40px rgba(0, 0, 0, 0.14),
     0 1px 2px rgba(0, 0, 0, 0.06),
     inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  /* A fixed element with backdrop-filter forces the browser to recompute the
+     blur every frame the content behind it changes (scrolling, the Hero's
+     canvas animations) — this promotes it to its own compositing layer so
+     that repaint work stays isolated instead of dragging the rest of the
+     page along with it. */
+  will-change: backdrop-filter;
+  transform: translateZ(0);
 }

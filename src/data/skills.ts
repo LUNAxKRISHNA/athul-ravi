@@ -40,7 +40,7 @@ export const skillGroups = [
 
 export const training = [
   {
-    duration: '2015–16 · 6 months',
+    duration: '6 months',
     title: 'Computer-Aided Drug Design (CADD) & 3D-QSAR',
     institution: 'Drug Discovery Centre, IIT Madras & Annamalai University',
   },
@@ -50,14 +50,14 @@ export const training = [
     institution: 'IIT Madras',
   },
   {
-    duration: '8 weeks · NPTEL',
+    duration: '8 weeks',
     title: 'Analytical Chemistry',
-    institution: 'IIT Kharagpur',
+    institution: 'NPTEL · IIT Kharagpur',
   },
   {
-    duration: '12 weeks · NPTEL',
+    duration: '12 weeks',
     title: 'Composite Materials',
-    institution: 'IIT Kanpur',
+    institution: 'NPTEL · IIT Kanpur',
   },
   {
     duration: '10 days',

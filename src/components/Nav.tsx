@@ -71,9 +71,10 @@ export function Nav() {
           <ul className="relative hidden gap-1.5 md:flex">
             {desktopPill && (
               <motion.div
-                animate={{ left: desktopPill.offset, width: desktopPill.size }}
+                animate={{ x: desktopPill.offset }}
                 transition={pillTransition}
-                className="absolute inset-y-0 top-0 rounded-full bg-black"
+                style={{ width: desktopPill.size, willChange: 'transform' }}
+                className="absolute inset-y-0 left-0 top-0 rounded-full bg-black"
               />
             )}
             {links.map((l) => {
@@ -119,9 +120,10 @@ export function Nav() {
           <ul className="nav-glass relative mt-2 flex min-w-[180px] flex-col gap-1 rounded-3xl p-2 md:hidden">
             {mobilePill && (
               <motion.div
-                animate={{ top: mobilePill.offset, height: mobilePill.size }}
+                animate={{ y: mobilePill.offset }}
                 transition={pillTransition}
-                className="absolute inset-x-0 left-0 rounded-2xl bg-black"
+                style={{ height: mobilePill.size, willChange: 'transform' }}
+                className="absolute inset-x-0 top-0 left-0 rounded-2xl bg-black"
               />
             )}
             {links.map((l) => {

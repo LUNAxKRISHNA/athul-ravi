@@ -35,7 +35,7 @@ export function Section({
     >
       {decorate}
       <div
-        className={`relative z-10 mx-auto px-6 ${tightBottom ? 'pb-6 md:pb-8' : 'pb-20 md:pb-24'} ${tightTop ? 'pt-6 md:pt-8' : 'pt-20 md:pt-24'} ${wide ? 'max-w-[100rem]' : 'max-w-5xl'}`}
+        className={`relative z-10 mx-auto px-6 ${tightBottom ? 'pb-4 md:pb-6' : 'pb-12 md:pb-16'} ${tightTop ? 'pt-4 md:pt-6' : 'pt-12 md:pt-16'} ${wide ? 'max-w-[100rem]' : 'max-w-5xl'}`}
       >
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -59,8 +59,8 @@ export function Section({
               {title}
             </h2>
           </div>
-          <div className={`${tightTop ? 'mt-4' : 'mt-6'} border-t ${invert ? 'border-white/15' : 'border-black/10'}`} />
-          <div className={tightTop ? 'mt-6' : 'mt-10'}>{children}</div>
+          <div className={`${tightTop ? 'mt-4' : 'mt-5'} border-t ${invert ? 'border-white/15' : 'border-black/10'}`} />
+          <div className={tightTop ? 'mt-6' : 'mt-8'}>{children}</div>
         </motion.div>
       </div>
     </section>
