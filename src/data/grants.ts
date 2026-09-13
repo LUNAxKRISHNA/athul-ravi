@@ -1,18 +1,23 @@
 export const grants = [
   {
     title: 'CSR Research Grant — Suven Pharmaceutical Ltd.',
-    detail:
-      '₹81 lakhs; establishment and support of the Centre for Biomaterials and Sustainable Chemistry (CBSC), CVV.',
+    amount: '₹81L',
+    role: 'Founding Head, CBSC',
+    detail: 'Establishment and support of the Centre for Biomaterials and Sustainable Chemistry (CBSC), CVV.',
     year: '2025',
   },
   {
     title: 'IKS Division, Ministry of Education, Government of India',
-    detail: 'Research project on natural adhesives. Co-Principal Investigator (Principal Investigator: Prof. Sunitha Grandhee).',
+    amount: null,
+    role: 'Co-Principal Investigator',
+    detail: 'Research project on natural adhesives, with Prof. Sunitha Grandhee as Principal Investigator.',
     year: '2025',
   },
   {
     title: 'ATAL Faculty Development Programme (AICTE)',
-    detail: '₹3.5 lakhs to conduct an ATAL FDP (Basic level). Coordinator.',
+    amount: '₹3.5L',
+    role: 'Coordinator',
+    detail: 'Conducted an AICTE-sponsored ATAL FDP at the Basic level.',
     year: '2024',
   },
 ]

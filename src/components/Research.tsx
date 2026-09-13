@@ -31,10 +31,7 @@ function ResearchCard({
       >
         {item.title}
       </h3>
-      <p
-        className="absolute inset-x-0 px-5 text-center text-xs font-normal leading-relaxed text-white"
-        style={{ top: '70%', mixBlendMode: 'difference' }}
-      >
+      <p className="absolute inset-x-0 px-5 text-center text-xs font-normal leading-relaxed text-body transition-colors duration-300 group-hover:text-white/60" style={{ top: '70%' }}>
         {item.description}
       </p>
     </div>
