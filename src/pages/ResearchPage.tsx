@@ -3,12 +3,13 @@ import { Publications } from '../components/Publications'
 import { Grants } from '../components/Grants'
 import { Projects } from '../components/Projects'
 import { SectionSeam } from '../components/SectionSeam'
+import { PublicationsSeam } from '../components/PublicationsSeam'
 
 export function ResearchPage() {
   return (
     <div className="pt-16">
       <Research />
-      <SectionSeam to="#000000" />
+      <PublicationsSeam />
       <Publications />
       <SectionSeam to="#ffffff" />
       <Grants />
