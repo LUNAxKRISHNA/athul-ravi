@@ -13,9 +13,8 @@ function ResearchCard({
   return (
     <div className="group relative isolate min-h-[320px] overflow-hidden bg-paper sm:min-h-[380px] lg:min-h-[460px]">
       <span
-        className={`absolute inset-x-0 h-full scale-y-0 bg-black transition-transform duration-500 ease-out group-hover:scale-y-100 ${
-          direction === 'down' ? 'top-0 origin-top' : 'bottom-0 origin-bottom'
-        }`}
+        className={`absolute inset-x-0 h-full scale-y-0 bg-black transition-transform duration-500 ease-out group-hover:scale-y-100 ${direction === 'down' ? 'top-0 origin-top' : 'bottom-0 origin-bottom'
+          }`}
       />
 
       <span
@@ -40,7 +39,7 @@ function ResearchCard({
 
 export function Research() {
   return (
-    <Section id="research" eyebrow="Research" title="Research Interests" centerHeader wide>
+    <Section id="research" eyebrow="Personal" title="Research Interests" centerHeader wide tightTop>
       <div className="grid grid-cols-2 divide-x divide-y divide-black/10 border border-black/10 sm:grid-cols-3 lg:grid-cols-6">
         {researchInterests.map((r, i) => (
           <ResearchCard key={r.id} item={r} index={i} />

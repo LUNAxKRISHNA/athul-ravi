@@ -12,6 +12,8 @@ export function Section({
   largeTitle,
   decorate,
   wide,
+  tightTop,
+  tightBottom,
 }: {
   id: string
   title: string
@@ -23,6 +25,8 @@ export function Section({
   largeTitle?: boolean
   decorate?: ReactNode
   wide?: boolean
+  tightTop?: boolean
+  tightBottom?: boolean
 }) {
   return (
     <section
@@ -30,7 +34,9 @@ export function Section({
       className={`relative scroll-mt-20 ${invert ? 'bg-black' : alt ? 'bg-paper-alt' : ''} ${decorate ? 'overflow-hidden' : ''}`}
     >
       {decorate}
-      <div className={`relative z-10 mx-auto px-6 py-20 md:py-24 ${wide ? 'max-w-[100rem]' : 'max-w-5xl'}`}>
+      <div
+        className={`relative z-10 mx-auto px-6 ${tightBottom ? 'pb-6 md:pb-8' : 'pb-20 md:pb-24'} ${tightTop ? 'pt-6 md:pt-8' : 'pt-20 md:pt-24'} ${wide ? 'max-w-[100rem]' : 'max-w-5xl'}`}
+      >
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -53,8 +59,8 @@ export function Section({
               {title}
             </h2>
           </div>
-          <div className={`mt-6 border-t ${invert ? 'border-white/15' : 'border-black/10'}`} />
-          <div className="mt-10">{children}</div>
+          <div className={`${tightTop ? 'mt-4' : 'mt-6'} border-t ${invert ? 'border-white/15' : 'border-black/10'}`} />
+          <div className={tightTop ? 'mt-6' : 'mt-10'}>{children}</div>
         </motion.div>
       </div>
     </section>
