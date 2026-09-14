@@ -42,7 +42,7 @@ export const training = [
   {
     duration: '6 months',
     title: 'Computer-Aided Drug Design (CADD) & 3D-QSAR',
-    institution: 'Drug Discovery Centre, IIT Madras & Annamalai University',
+    institution: 'Drug Discovery Centre,  IIT Madras & Annamalai University',
   },
   {
     duration: '1 month',

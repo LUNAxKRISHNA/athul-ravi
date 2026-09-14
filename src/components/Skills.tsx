@@ -52,7 +52,7 @@ export function Skills() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.45, ease: 'easeOut', delay: i * 0.08 }}
-              className="flex min-h-[170px] flex-col items-center border border-black/10 px-5 pt-6 text-center"
+              className="flex min-h-42.5 flex-col items-center border border-black/10 px-5 pt-6 text-center"
             >
               <p className="font-mono text-[10px] font-semibold uppercase tracking-widest text-body/70">
                 {t.institution}

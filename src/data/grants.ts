@@ -8,7 +8,7 @@ export const grants = [
   },
   {
     title: 'IKS Division, Ministry of Education, Government of India',
-    amount: null,
+    amount: '₹7.5L',
     role: 'Co-Principal Investigator',
     detail: 'Research project on natural adhesives, with Prof. Sunitha Grandhee as Principal Investigator.',
     year: '2025',
